@@ -23,7 +23,12 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      /// todo add comments 
+      const commentList = await Comment.find({post:req.params.id})
+      console.log(`comments are: `,commentList)
+
+      ///
+      res.render("post.ejs", { post: post, user: req.user, comments:commentList });
     } catch (err) {
       console.log(err);
     }
