@@ -22,5 +22,17 @@ module.exports = {
           } catch (err) {
             console.log(err);
           }
-        },
+  },
+
+
+  addLike:async (req, res) => {
+    console.log(req.params)
+    const comment =  await Comment.findOne({_id:req.params.comment_id})
+    console.log(comment)
+    comment.likes++
+    console.log(comment)
+    await comment.save()
+    res.redirect("/post/" + req.params.post_id);
+    
+  },
 }
